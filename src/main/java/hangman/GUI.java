@@ -30,6 +30,7 @@ public class GUI {
     public static final String GAME_KEY = "gamescreen";
     public static final String GAME_OVER_KEY = "gameoverscreen";
 
+    @Inject
     private Language language;
     private HangmanDictionary dictionary;
     private HangmanPanel hangmanPanel;
@@ -52,6 +53,7 @@ public class GUI {
 
     
     // Use Guice constructor
+    @Inject
     public GUI(Language language, HangmanDictionary dictionary, HangmanPanel hangmanPanel){
         this.language = language;
         this.dictionary= dictionary;
