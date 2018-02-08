@@ -5,6 +5,8 @@
  */
 package hangman.model;
 
+import hangman.model.GameModel;
+
 /**
  *
  * @author 2104784
@@ -21,7 +23,9 @@ public class OriginalScore implements GameScore{
      */
     @Override
     public int calculateScore(int correctCount, int incorrectCount) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int gameScore=100;
+        gameScore += (incorrectCount*(-10));
+        return gameScore<0?gameScore=0:gameScore;
     }
     
 }

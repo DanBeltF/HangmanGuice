@@ -21,7 +21,8 @@ public class BonusScore implements GameScore{
      */
     @Override
     public int calculateScore(int correctCount, int incorrectCount) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int gameScore=0;
+        gameScore = ((correctCount*10) + (incorrectCount*-5));
+        return gameScore<0?gameScore=0:gameScore;
     }
-    
 }

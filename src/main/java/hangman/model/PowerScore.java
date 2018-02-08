@@ -13,7 +13,7 @@ public class PowerScore implements GameScore{
     
     /**
      * El juego inicia con 0 p
-     * @pre correctCount <=0 & incorrectCount >=0
+     * @pre correctCount >=0 & incorrectCount >=0
      * @pos 0 <= puntaje <= 500
      * @param correctCount - cantidad acertadas
      * @param incorrectCount - cantidad fallas
@@ -21,7 +21,11 @@ public class PowerScore implements GameScore{
      */
     @Override
     public int calculateScore(int correctCount, int incorrectCount) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int gameScore;
+        gameScore = (int) (Math.pow((double)5, (double)correctCount) + (incorrectCount*-8));
+        if (gameScore < 0){gameScore=0;}
+        if (gameScore > 500){gameScore=500;}
+        return gameScore;
     }
     
 }

@@ -20,7 +20,8 @@ import org.quicktheories.generators.Lists;
 import static org.quicktheories.QuickTheory.qt;
 import static org.quicktheories.generators.Generate.*;
 import static org.quicktheories.generators.SourceDSL.*;
-
+import hangman.model.GameModel;
+import java.util.Objects;
 
 /**
  *
@@ -44,38 +45,44 @@ import static org.quicktheories.generators.SourceDSL.*;
  */
 
 public class GameScoreTest {
-    
-    public GameScoreTest() {
-    }
+        
+    private int score1;
+    private int score2;
     
     @Before
     public void init() {
+        score1=100;
+        score2=0;
     }
     
     @Test
     public void testClaseEquivalenciaUno(){
         OriginalScore os = new OriginalScore();
         
-        qt().forAll(integers().allPositive().describedAs(c -> "Correct = " + c)
-                   ,integers().between(0, 10).describedAs(i -> "Incorrect = " + i))
-        .check((c,i) -> os.calculateScore(c,i) == i*-10 && os.calculateScore(c,i) >= 0);
+        qt().forAll(range(0, 10).describedAs(c -> "Correct = " + c)
+                   ,range(0, 10).describedAs(i -> "Incorrect = " + i))
+        .check((c,i) -> {
+            return os.calculateScore(c,i) == score1 + (i*(-10)) && os.calculateScore(c,i) >= 0 && os.calculateScore(c,i) <= 100;});
     }
     
     @Test
     public void testClaseEquivalenciaDos(){
         BonusScore bs = new BonusScore();
         
-        qt().forAll(integers().allPositive().describedAs(c -> "Correct = " + c)
-                   ,integers().allPositive().describedAs(i -> "Incorrect = " + i))
-        .check((c,i) -> bs.calculateScore(c,i) == (c*10)+(i*-5) && bs.calculateScore(c,i) >= 0);
+        qt().forAll(range(0, 10).describedAs(c -> "Correct = " + c)
+                   ,range(0, 10).describedAs(i -> "Incorrect = " + i))
+        .check((c,i) -> {System.out.println(bs.calculateScore(c, i));
+            return bs.calculateScore(c,i) == ((c*10)+(i*-5)) && bs.calculateScore(c,i) >= 0;});
     }
     
     @Test
     public void testClaseEquivalenciaTres(){
         PowerScore ps = new PowerScore();
         
-        qt().forAll(integers().allPositive().describedAs(c -> "Correct = " + c)
-                   ,integers().allPositive().describedAs(i -> "Incorrect = " + i))
-        .check((c,i) -> ps.calculateScore(c,i) == (5^c)+(i*-8) && ps.calculateScore(c,i) >= 0 && ps.calculateScore(c,i) <= 500);
+        qt().forAll(range(1, 10).describedAs(c -> "Correct = " + c)
+                   ,range(1, 10).describedAs(i -> "Incorrect = " + i))
+        .assuming((c,i) -> c!=i)
+        .check((c,i) -> {
+            return ps.calculateScore(c,i) ==(int) ((Math.pow((double)5, (double)c))+(i*-8)) && ps.calculateScore(c,i) >= 0 && ps.calculateScore(c,i) <= 500;});
     }
 }
