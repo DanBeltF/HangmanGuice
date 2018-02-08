@@ -50,7 +50,7 @@ public class GUI {
         this.hangmanPanel = factoryMethod.createHangmanPanel();
     }
 
-    @Inject
+    
     // Use Guice constructor
     public GUI(Language language, HangmanDictionary dictionary, HangmanPanel hangmanPanel){
         this.language = language;
