@@ -71,8 +71,10 @@ public class GameScoreTest {
         
         qt().forAll(range(0, 10).describedAs(c -> "Correct = " + c)
                    ,range(0, 10).describedAs(i -> "Incorrect = " + i))
-        .check((c,i) -> {System.out.println(bs.calculateScore(c, i));
-            return bs.calculateScore(c,i) == ((c*10)+(i*-5)) && bs.calculateScore(c,i) >= 0;});
+        .check((c,i) -> {
+            int calc = (c*10)+(i*-5);
+            if (calc < 0)calc=0;
+            return bs.calculateScore(c,i) == calc && bs.calculateScore(c,i) >= 0;});
     }
     
     @Test
@@ -83,6 +85,9 @@ public class GameScoreTest {
                    ,range(1, 10).describedAs(i -> "Incorrect = " + i))
         .assuming((c,i) -> c!=i)
         .check((c,i) -> {
-            return ps.calculateScore(c,i) ==(int) ((Math.pow((double)5, (double)c))+(i*-8)) && ps.calculateScore(c,i) >= 0 && ps.calculateScore(c,i) <= 500;});
+            int calc = (int) (Math.pow((double)5, (double)c)+(i*-8));
+            if (calc < 0)calc=0;
+            if (calc > 500)calc=500;
+            return ps.calculateScore(c,i) == calc && ps.calculateScore(c,i) >= 0 && ps.calculateScore(c,i) <= 500;});
     }
 }
