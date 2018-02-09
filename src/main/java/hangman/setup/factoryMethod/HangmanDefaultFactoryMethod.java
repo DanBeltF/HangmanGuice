@@ -22,7 +22,7 @@ public class HangmanDefaultFactoryMethod extends HangmanFactoryMethod {
     private HangmanPanel hangmanPanel;
     
     @Inject
-    private GameScore gameScore;
+    private GameScore gs;
     
     @Override
     public Language createLanguage() {
@@ -41,6 +41,6 @@ public class HangmanDefaultFactoryMethod extends HangmanFactoryMethod {
     
     @Override
     public GameScore createGameScore(){
-        return gameScore;
+        return gs;
     }
 }

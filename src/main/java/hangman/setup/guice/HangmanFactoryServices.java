@@ -14,19 +14,17 @@ import hangman.model.French;
 import hangman.model.Language;
 import hangman.model.dictionary.HangmanDictionary;
 import hangman.model.dictionary.FrenchDictionaryDataSource;
-import hangman.view.HangmanNoviolentoPanel;
 import hangman.view.HangmanPanel;
 import hangman.model.*;
-import hangman.model.dictionary.EnglishDictionaryDataSource;
 import hangman.view.*;
 
 public class HangmanFactoryServices extends com.google.inject.AbstractModule {
 
     @Override
     protected void configure() {
-        bind(HangmanDictionary.class).to(EnglishDictionaryDataSource.class);
+        bind(HangmanDictionary.class).to(FrenchDictionaryDataSource.class);
         bind(HangmanPanel.class).to(HangmanColoridoPanel.class);
-        bind(Language.class).to(English.class);
+        bind(Language.class).to(French.class);
         bind(GameScore.class).to(OriginalScore.class);
     }
 

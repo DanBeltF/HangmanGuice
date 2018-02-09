@@ -17,12 +17,15 @@ import hangman.model.dictionary.HangmanDictionary;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
+import hangman.model.*;
 
 public class GameModel {
     private int incorrectCount;
     private int correctCount;
     private LocalDateTime dateTime;
+    @Inject 
+    private GameScore gs;
+    
     private int gameScore;
     private int[] lettersUsed;
     
@@ -33,7 +36,7 @@ public class GameModel {
     private String randomWord;
     private char[] randomWordCharArray;
   
-   
+    @Inject
     public GameModel(HangmanDictionary dictionary){
         //this.dictionary = new EnglishDictionaryDataSource();
         this.dictionary=dictionary;
@@ -41,18 +44,24 @@ public class GameModel {
         randomWordCharArray = randomWord.toCharArray();
         incorrectCount = 0;
         correctCount = 0;
-        gameScore = getScore();//gameScore = 100;
+        System.out.println(gs);
+        gameScore = getScore();//gs.calculateScore(correctCount, incorrectCount);//getScore();//gameScore = 100;
+        
         
     }
     
     //method: reset
     //purpose: reset this game model for a new game
+    @Inject
     public void reset(){
         randomWord = selectRandomWord();
         randomWordCharArray = randomWord.toCharArray();
         incorrectCount = 0;
         correctCount = 0;
-        gameScore = getScore();
+        System.out.println("NO ENTRA");
+        //System.out.println(gs);
+        if (gs instanceof OriginalScore){gameScore=100;System.out.println("SI ENTRA");}
+        else if (gs instanceof BonusScore|| gs instanceof PowerScore){gameScore=0;System.out.println("ENTRA AL SEGUNDO");}
         //gameScore = 100;
     }
 
@@ -75,7 +84,8 @@ public class GameModel {
         }
         if(positions.size() == 0){
             incorrectCount++;
-            gameScore -= 10;
+            gameScore -= 10;//gs.calculateScore(correctCount, incorrectCount);
+            if (gameScore < 0){gameScore=0;}
         } else {
             correctCount += positions.size();
         }
@@ -139,8 +149,16 @@ public class GameModel {
     public int getWordLength(){
         return randomWord.length();
     }
-
+    
     public List<Character> getCharacterSet() {
         return new ArrayList<>(dictionary.getCharacterSet());
+    }
+
+    public GameScore getGs() {
+        return gs;
+    }
+
+    public void setGs(GameScore gs) {
+        this.gs = gs;
     }
 }

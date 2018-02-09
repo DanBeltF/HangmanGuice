@@ -27,7 +27,7 @@ import hangman.SwingProject;
 import hangman.model.GameModel;
 import hangman.model.Language;
 import hangman.view.GamePanel;
-
+import hangman.model.*;
 public class GameController{
     private GamePanel panel;
     private GameModel model;
@@ -89,7 +89,7 @@ public class GameController{
                 }
             });
         }
-
+        
         model.setScore(100);
                 
         panel.addAncestorListener(new AncestorListener(){
@@ -120,7 +120,8 @@ public class GameController{
         panel.getSkipButton().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                model.setScore(0);
+                if (model.getGs() instanceof OriginalScore){model.setScore(100);}
+                else if (model.getGs() instanceof BonusScore || model.getGs() instanceof PowerScore){model.setScore(0);}
                 rootController.changeVisibleCard(GUI.GAME_OVER_KEY);
             }
             
