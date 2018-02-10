@@ -36,7 +36,9 @@ public class GUI {
     private HangmanDictionary dictionary;
     @Inject
     private HangmanPanel hangmanPanel;
-
+    @Inject 
+    private GameScore gs;
+    
     private MainFrameController mainFrameController;
 
     private SplashController splashController;
@@ -83,7 +85,7 @@ public class GUI {
                 mainFrameController
         );
 
-        GameModel gameModel = new GameModel(dictionary);
+        GameModel gameModel = new GameModel(dictionary, gs);
         gameController = new GameController(
                 new GamePanel(gameModel.getCharacterSet(), hangmanPanel, language),
                 gameModel,

@@ -37,14 +37,14 @@ public class GameModel {
     private char[] randomWordCharArray;
   
     @Inject
-    public GameModel(HangmanDictionary dictionary){
+    public GameModel(HangmanDictionary dictionary, GameScore gs){
         //this.dictionary = new EnglishDictionaryDataSource();
         this.dictionary=dictionary;
         randomWord = selectRandomWord();
         randomWordCharArray = randomWord.toCharArray();
         incorrectCount = 0;
         correctCount = 0;
-        System.out.println(gs);
+        this.gs=gs;
         if (gs instanceof OriginalScore){gameScore=100;}
         else if (gs instanceof BonusScore||gs instanceof PowerScore){gameScore=0;}//gameScore = getScore();//gs.calculateScore(correctCount, incorrectCount);//getScore();//gameScore = 100;
         
@@ -59,11 +59,8 @@ public class GameModel {
         randomWordCharArray = randomWord.toCharArray();
         incorrectCount = 0;
         correctCount = 0;
-        System.out.println("NO ENTRA");
-        //System.out.println(gs);
-        if (gs instanceof OriginalScore){gameScore=100;System.out.println("SI ENTRA");}
-        else if (gs instanceof BonusScore|| gs instanceof PowerScore){gameScore=0;System.out.println("ENTRA AL SEGUNDO");}
-        //gameScore = 100;
+        if (gs instanceof OriginalScore){gameScore=100;;}
+        else if (gs instanceof BonusScore|| gs instanceof PowerScore){gameScore=0;}
     }
 
     //setDateTime
@@ -85,11 +82,10 @@ public class GameModel {
         }
         if(positions.size() == 0){
             incorrectCount++;
-            gameScore -= 10;//gs.calculateScore(correctCount, incorrectCount);
-            if (gameScore < 0){gameScore=0;}
         } else {
             correctCount += positions.size();
         }
+        gameScore = gs.calculateScore(correctCount, incorrectCount);
         return positions;
         
     }

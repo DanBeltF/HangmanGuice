@@ -48,7 +48,6 @@ public class GameController{
     }
     
     
-    
     //method: setup
     //purpose: set contents of model to be reflected in the view, as well as
     // set button listeners, and activates time label
@@ -92,7 +91,7 @@ public class GameController{
         }
         
         if (model.getGs() instanceof OriginalScore){model.setScore(100);}
-        else {model.setScore(0);}
+        else if(model.getGs() instanceof BonusScore||model.getGs() instanceof PowerScore){model.setScore(0);}
                 
         panel.addAncestorListener(new AncestorListener(){
             @Override
