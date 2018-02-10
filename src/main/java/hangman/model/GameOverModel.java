@@ -21,6 +21,7 @@ public class GameOverModel {
     private String newGameButtonText;
     private String menuButtonText;
     
+    @Inject
     private Language lan;
     
     

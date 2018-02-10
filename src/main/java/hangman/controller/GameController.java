@@ -30,6 +30,7 @@ import hangman.view.GamePanel;
 import hangman.model.*;
 public class GameController{
     private GamePanel panel;
+    @Inject
     private GameModel model;
     private MainFrameController rootController;
     
@@ -90,7 +91,8 @@ public class GameController{
             });
         }
         
-        model.setScore(100);
+        if (model.getGs() instanceof OriginalScore){model.setScore(100);}
+        else {model.setScore(0);}
                 
         panel.addAncestorListener(new AncestorListener(){
             @Override

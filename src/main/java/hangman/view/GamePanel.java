@@ -33,8 +33,9 @@ public class GamePanel extends JPanel{
     private JLabel points;
     private JPanel keyboard;
     
-    
+    @Inject
     private HangmanPanel hmPanel;
+    @Inject
     private Language lan;
     
     private JPanel blanksHolder;

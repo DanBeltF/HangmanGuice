@@ -29,7 +29,7 @@ public class GameModel {
     private int gameScore;
     private int[] lettersUsed;
     
-    
+    @Inject
     private HangmanDictionary dictionary;
     
     private Scanner scan;
@@ -45,7 +45,8 @@ public class GameModel {
         incorrectCount = 0;
         correctCount = 0;
         System.out.println(gs);
-        gameScore = getScore();//gs.calculateScore(correctCount, incorrectCount);//getScore();//gameScore = 100;
+        if (gs instanceof OriginalScore){gameScore=100;}
+        else if (gs instanceof BonusScore||gs instanceof PowerScore){gameScore=0;}//gameScore = getScore();//gs.calculateScore(correctCount, incorrectCount);//getScore();//gameScore = 100;
         
         
     }

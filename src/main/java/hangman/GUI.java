@@ -32,7 +32,9 @@ public class GUI {
 
     @Inject
     private Language language;
+    @Inject
     private HangmanDictionary dictionary;
+    @Inject
     private HangmanPanel hangmanPanel;
 
     private MainFrameController mainFrameController;

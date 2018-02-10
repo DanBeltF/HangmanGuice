@@ -31,7 +31,7 @@ public class GameOverController {
     private GameOverModel model;
     private MainFrameController rootController;
     
-    
+    @Inject
     private Language lan;
 
     public GameOverController(GameOverPanel panel, GameOverModel model, MainFrameController rootController,Language lan) {

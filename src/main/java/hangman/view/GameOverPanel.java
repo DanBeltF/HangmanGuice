@@ -32,14 +32,14 @@ public class GameOverPanel extends JPanel {
     private JButton button1;
     private JButton button2;
     
-    
+    @Inject
     private Language lan;
     
     private static final Font BUTTON_FONT = new Font("Arial Black", Font.BOLD, 32);
     private static final Border BUTTON_BORDER = BorderFactory.
             createCompoundBorder(BorderFactory.createEmptyBorder(5,5,5,5),
                     BorderFactory.createBevelBorder(BevelBorder.RAISED,Color.WHITE,Color.GRAY));
-    
+    @Inject
     public GameOverPanel(Language lan) {
         this.lan=lan;
         this.initComponents();

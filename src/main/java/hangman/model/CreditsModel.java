@@ -24,7 +24,7 @@ public class CreditsModel {
     private Color backgroundColor;
     private String backButtonText;
     
-   
+    @Inject
     private Language lan;
     
     //CreditsModel default constructor.
